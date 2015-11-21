@@ -1,6 +1,6 @@
 # FexEx-API-Integration-PHP
 
-It is generally created for developertest mode. Once you finish the test mode process just replace your test credentials with your live credentials and URL too.
+It is generally created for developer-test mode. Once you finish the test mode process just replace your test credentials with your live credentials and URL too.
 
 How to use?
 
