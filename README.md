@@ -8,4 +8,6 @@ How to use?
 
 2) Replace the parameter values with your original creditials.
    (eg. DeveloperTestKey, DeveloperTestPassword, AccountNumber, MeterNumber, etc).
+   
+   Source : http://developersurajjain.blogspot.in/2015/11/fedex-api-integration-php-non-soap.html
 
