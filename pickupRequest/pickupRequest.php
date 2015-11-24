@@ -21,33 +21,33 @@ $xml= simplexml_load_file($xml_file);
 /*
 / Fedex parameters
 */
-$UserCredential_Key 		  = 'DEVELOPER_KEY';
+$UserCredential_Key 		= 'DEVELOPER_KEY';
 $UserCredential_Password 	= 'DEVELOPER_PASSWORD';
-$AccountNumber 				    = 'FEDEX_ACCOUNT_NUMBER';
-$MeterNumber 				      = 'FEDEX_METER_NUMBER';
+$AccountNumber 				= 'FEDEX_ACCOUNT_NUMBER';
+$MeterNumber 				= 'FEDEX_METER_NUMBER';
 
-$xml->Body->CreatePickupRequest->WebAuthenticationDetail->UserCredential->Key 		  = $UserCredential_Key;
+$xml->Body->CreatePickupRequest->WebAuthenticationDetail->UserCredential->Key 		= $UserCredential_Key;
 $xml->Body->CreatePickupRequest->WebAuthenticationDetail->UserCredential->Password 	= $UserCredential_Password;
-$xml->Body->CreatePickupRequest->ClientDetail->AccountNumber 						            = $AccountNumber;
-$xml->Body->CreatePickupRequest->ClientDetail->MeterNumber 							            = $MeterNumber;
+$xml->Body->CreatePickupRequest->ClientDetail->AccountNumber 						= $AccountNumber;
+$xml->Body->CreatePickupRequest->ClientDetail->MeterNumber 							= $MeterNumber;
 /* 
 / s/w inputs
 */
 $CustomerTransactionId 	= 'Company_pickup_2222';
-$UseAccountAddress 		  = 'false';
+$UseAccountAddress 		= 'false';
 
 $xml->Body->CreatePickupRequest->TransactionDetail->CustomerTransactionId 			= $CustomerTransactionId;
-$xml->Body->CreatePickupRequest->OriginDetail->UseAccountAddress 					      = $UseAccountAddress;
+$xml->Body->CreatePickupRequest->OriginDetail->UseAccountAddress 					= $UseAccountAddress;
 
-$PersonName 			    = 'Customer name';
-$CompanyName 			    = 'Company name';
-$PhoneNumber 			    = '9595959595';
-$EMailAddress 			  = 'example@domail.com';
-$StreetLines 			    = 'Address';
-$City 					      = 'City'; //eg. Bangalore
+$PersonName 			= 'Customer name';
+$CompanyName 			= 'Company name';
+$PhoneNumber 			= '9595959595';
+$EMailAddress 			= 'example@domail.com';
+$StreetLines 			= 'Address';
+$City 					= 'City'; //eg. Bangalore
 $StateOrProvinceCode 	= 'State'; // eg. KA
-$PostalCode 			    = 560001;
-$CountryCode 			    = 'Country'; // eg. IN
+$PostalCode 			= 560001;
+$CountryCode 			= 'Country'; // eg. IN
 
 $xml->Body->CreatePickupRequest->OriginDetail->PickupLocation->Contact->PersonName 	= $PersonName;
 $xml->Body->CreatePickupRequest->OriginDetail->PickupLocation->Contact->CompanyName = $CompanyName;
@@ -60,19 +60,19 @@ $xml->Body->CreatePickupRequest->OriginDetail->PickupLocation->Address->PostalCo
 $xml->Body->CreatePickupRequest->OriginDetail->PickupLocation->Address->CountryCode = $CountryCode;
 
 date_default_timezone_set('UTC');
-$ReadyTimestamp 		  = date('c', mktime(17, 0, 0, date('m'), date('d'), date('Y')));
+$ReadyTimestamp 		= date('c', mktime(17, 0, 0, date('m'), date('d'), date('Y')));
 $CompanyCloseTime 		= date('H:i:s', strtotime('20:00:00'));
-$PackageCount 			  = 1; // no. of packages
-$Units 					      = 'KG';// eg. KG, GM
-$Value 					      = 10;// eg. 32 in KG
-$Remarks 				      = 'This is a test API call. Please do not arrange for pick up. Only test pickup request';
+$PackageCount 			= 1; // no. of packages
+$Units 					= 'KG';// eg. KG, GM
+$Value 					= 10;// eg. 32 in KG
+$Remarks 				= 'This is a test API call. Please do not arrange for pick up. Only test pickup request';
 
 $xml->Body->CreatePickupRequest->OriginDetail->ReadyTimestamp 						= $ReadyTimestamp;
 $xml->Body->CreatePickupRequest->OriginDetail->CompanyCloseTime 					= $CompanyCloseTime;
-$xml->Body->CreatePickupRequest->PackageCount 										        = $PackageCount;
-$xml->Body->CreatePickupRequest->TotalWeight->Units 								      = $Units;
-$xml->Body->CreatePickupRequest->TotalWeight->Value 								      = $Value;
-$xml->Body->CreatePickupRequest->Remarks 											            = $Remarks;
+$xml->Body->CreatePickupRequest->PackageCount 										= $PackageCount;
+$xml->Body->CreatePickupRequest->TotalWeight->Units 								= $Units;
+$xml->Body->CreatePickupRequest->TotalWeight->Value 								= $Value;
+$xml->Body->CreatePickupRequest->Remarks 											= $Remarks;
 
 file_put_contents($xml_file, $xml->asXML());
 		 
@@ -81,8 +81,7 @@ $xml= simplexml_load_file($xml_file);
 $fh = fopen($xml_file, 'r'); 
 $xml_data = fread($fh, filesize($xml_file)); 
 fclose($fh); 
-
-// replace with live url		
+		
 $url = "https://wsbeta.fedex.com:443/web-services"; 
 $page = "/xml"; 
 $headers = array( 
@@ -119,22 +118,32 @@ if(curl_errno($ch)) {
 		$body = $soap[0];
 		
 		// required
-		$requestStatus 		  = $body->CreatePickupReply->HighestSeverity;
-		$code 				      = $body->CreatePickupReply->Notifications->Code;
-		$message 			      = $body->CreatePickupReply->Notifications->Message;		
-		$cusTxnId 			    = $body->CreatePickupReply->TransactionDetail->CustomerTransactionId;
-		$pickUpConfmNo 		  = $body->CreatePickupReply->PickupConfirmationNumber;
-		$location 			    = $body->CreatePickupReply->Location;
-		$status 			      = $body->CreatePickupReply->Notifications->Severity;
-		$source 			      = $body->CreatePickupReply->Notifications->Source;
-		$locMessage 		    = $body->CreatePickupReply->Notifications->LocalizedMessage;
-		$serviceId 			    = $body->CreatePickupReply->Version->ServiceId;
-		$major 				      = $body->CreatePickupReply->Version->Major;
-		$intermediate 		  = $body->CreatePickupReply->Version->Intermediate;
-		$minor 				      = $body->CreatePickupReply->Version->Minor;
+		$requestStatus 		= $body->CreatePickupReply->HighestSeverity;
+		$code 				= $body->CreatePickupReply->Notifications->Code;
+		$message 			= $body->CreatePickupReply->Notifications->Message;		
+		$cusTxnId 			= $body->CreatePickupReply->TransactionDetail->CustomerTransactionId;
+		$pickUpConfmNo 		= $body->CreatePickupReply->PickupConfirmationNumber;
+		$location 			= $body->CreatePickupReply->Location;
 		
-		echo '<div style="max-width: 850px;margin: 0 auto;">';
-		echo '<table cellpadding="5" cellspacing="0" border="1" style="background: #F9F9F9;border: #666 solid 1px;border-collapse: collapse;font-family: monospace;margin: 0 auto;">';
+		// not required
+		$status 			= $body->CreatePickupReply->Notifications->Severity;
+		$source 			= $body->CreatePickupReply->Notifications->Source;
+		$locMessage 		= $body->CreatePickupReply->Notifications->LocalizedMessage;
+		
+		$serviceId 			= $body->CreatePickupReply->Version->ServiceId;
+		$major 				= $body->CreatePickupReply->Version->Major;
+		$intermediate 		= $body->CreatePickupReply->Version->Intermediate;
+		$minor 				= $body->CreatePickupReply->Version->Minor;
+		
+		echo '<style type="text/css">
+				
+				.table{background: #F9F9F9;border: #D2D2D2 solid 1px;border-collapse: collapse;font-size: 12px;word-break: break-all;overflow: auto;width: 100%;font-family: monospace;}
+			 	.table th{background: #FFFFFF;border: #D2D2D2 solid 1px;font-size: 13px;}
+				.table td{border-bottom: #D2D2D2 solid 1px;}
+			 	.table tr td:first-child { color:#0054EC; }
+			 </style>';
+		echo '<div style="max-width: 850px;margin: 0 auto;">';		
+		echo '<table cellpadding="5" cellspacing="0" border="0" class="table">';
 		echo '<tr><th colspan="2">FedEx Response : CreatePickUpRequest</th></tr>';
 		echo '<tr><td>HighestSeverity</td><td>' . $requestStatus . '</td></tr>';
 		echo '<tr><td>Code</td><td>' . $code . '</td></tr>';
