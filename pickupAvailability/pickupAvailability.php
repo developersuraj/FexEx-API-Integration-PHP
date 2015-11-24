@@ -149,8 +149,14 @@ if(curl_errno($ch)) {
 		$intermediate 		= $body->PickupAvailabilityReply->Version->Intermediate;
 		$minor 				= $body->PickupAvailabilityReply->Version->Minor;
 		
+		echo '<style type="text/css">				
+				.table{background: #F9F9F9;border: #D2D2D2 solid 1px;border-collapse: collapse;font-size: 12px;word-break: break-all;overflow: auto;width: 100%;font-family: monospace;}
+			 	.table th{background: #FFFFFF;border: #D2D2D2 solid 1px;font-size: 13px;}
+				.table td{border-bottom: #D2D2D2 solid 1px;}
+			 	.table tr td:first-child { color:#0054EC; }
+			 </style>';
 		echo '<div style="max-width: 850px;margin: 0 auto;">';		
-		echo '<table cellpadding="5" cellspacing="0" border="1" style="background: #F9F9F9;border: #666 solid 1px;border-collapse: collapse;font-family: monospace;margin: 0 auto;">';
+		echo '<table cellpadding="5" cellspacing="0" border="0" class="table">';
 		echo '<tr><th colspan="2">FedEx Response : pickUpAvailability</th></tr>';
 		echo '<tr><td>HighestSeverity</td><td>' . $requestStatus . '</td></tr>';
 		echo '<tr><td>Code</td><td>' . $code . '</td></tr>';
