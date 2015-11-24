@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://fedex.com/ws/track/v11">
+   <SOAP-ENV:Body>
+      <TrackRequest>
+         <WebAuthenticationDetail>
+            <UserCredential>
+               <Key/>
+               <Password/>
+            </UserCredential>
+         </WebAuthenticationDetail>
+         <ClientDetail>
+            <AccountNumber/>
+            <MeterNumber/>
+         </ClientDetail>
+         <TransactionDetail>
+            <CustomerTransactionId/>
+         </TransactionDetail>
+         <Version>
+            <ServiceId>trck</ServiceId>
+            <Major>11</Major>
+            <Intermediate>0</Intermediate>
+            <Minor>0</Minor>
+         </Version>
+		 <SelectionDetails>
+			 <CarrierCode/>
+			 <PackageIdentifier>
+				 <Type>TRACKING_NUMBER_OR_DOORTAG</Type>
+				 <Value/>
+			 </PackageIdentifier>
+		 </SelectionDetails>
+		 <ProcessingOptions/>
+      </TrackRequest>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
